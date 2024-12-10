@@ -1,31 +1,36 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+
 import 'package:negocios_col_panel/utils/colors.dart';
 
-class ItemGraficosBarras {
-  final String name;
+class ItemGraficosDobleBarras {
+  final String name1;
+  final String name2;
   final String label;
-  final double value;
-  ItemGraficosBarras({
-    required this.name,
+  final double value1;
+  final double value2;
+  ItemGraficosDobleBarras({
+    required this.name1,
+    required this.name2,
     required this.label,
-    required this.value,
+    required this.value1,
+    required this.value2,
   });
 }
 
-class GraficosBarras extends StatefulWidget {
-  final List<ItemGraficosBarras> data;
-  const GraficosBarras({
+class GraficosDobleBarras extends StatefulWidget {
+  final List<ItemGraficosDobleBarras> data;
+  const GraficosDobleBarras({
     Key? key,
     required this.data,
   }) : super(key: key);
 
   @override
-  State<GraficosBarras> createState() => _GraficosBarrasState();
+  State<GraficosDobleBarras> createState() => _GraficosDobleBarrasState();
 }
 
-class _GraficosBarrasState extends State<GraficosBarras> {
+class _GraficosDobleBarrasState extends State<GraficosDobleBarras> {
   final Duration animDuration = const Duration(milliseconds: 250);
 
   int touchedIndex = -1;
@@ -44,7 +49,8 @@ class _GraficosBarrasState extends State<GraficosBarras> {
   BarChartGroupData makeGroupData(
     int x,
     int i,
-    double y, {
+    double y1,
+    double y2, {
     bool isTouched = false,
     Color? barColor,
     double width = 22,
@@ -55,15 +61,28 @@ class _GraficosBarrasState extends State<GraficosBarras> {
       x: x,
       barRods: [
         BarChartRodData(
-          toY: isTouched ? y + 1 : y,
-          color: isTouched ? barColor.withOpacity(0.5) : barColor,
+          toY: y1,
+          color: barColor,
           width: width,
           borderSide: isTouched
               ? BorderSide(color: barColor.withOpacity(0.2))
               : const BorderSide(color: Colors.white, width: 0),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
-            toY: 100,
+            // toY: 20,
+            // color: Colors.red,
+          ),
+        ),
+        BarChartRodData(
+          toY: y2,
+          color: barColor,
+          width: width,
+          borderSide: isTouched
+              ? BorderSide(color: barColor.withOpacity(0.2))
+              : const BorderSide(color: Colors.white, width: 0),
+          backDrawRodData: BackgroundBarChartRodData(
+            show: true,
+            toY: 20,
             // color: Colors.red,
           ),
         ),
@@ -78,11 +97,17 @@ class _GraficosBarrasState extends State<GraficosBarras> {
         touchTooltipData: BarTouchTooltipData(
           getTooltipColor: (_) => Colors.blueGrey,
           tooltipHorizontalAlignment: FLHorizontalAlignment.right,
-          tooltipMargin: -10,
+          tooltipMargin: -100,
           getTooltipItem: (group, groupIndex, rod, rodIndex) {
-            final data = widget.data[group.x];
+            final data = widget.data[groupIndex];
+            final nombre = rodIndex == 0 ? data.name1 : data.name2;
+            final valor = rodIndex == 0 ? data.value1 : data.value2;
+
+            print("groupIndex: $groupIndex, rodIndex:$rodIndex");
+            // print(
+            //     "{group: $group, groupIndex: $groupIndex, rod:$rod, rodIndex:$rodIndex}");
             return BarTooltipItem(
-              '${data.name}\n',
+              '$nombre\n',
               const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -90,7 +115,7 @@ class _GraficosBarrasState extends State<GraficosBarras> {
               ),
               children: <TextSpan>[
                 TextSpan(
-                  text: (data.value).toString(),
+                  text: (valor).toString(),
                   style: const TextStyle(
                     color: Colors.white, //widget.touchedBarColor,
                     fontSize: 16,
@@ -153,7 +178,8 @@ class _GraficosBarrasState extends State<GraficosBarras> {
       ),
       barGroups: {
         for (int i = 0; i < widget.data.length; i++)
-          i: makeGroupData(i, i, widget.data[i].value, isTouched: i == touchedIndex)
+          i: makeGroupData(i, i, widget.data[i].value1, widget.data[i].value2,
+              isTouched: i == touchedIndex)
       }.values.toList(),
       gridData: const FlGridData(show: false),
     );
