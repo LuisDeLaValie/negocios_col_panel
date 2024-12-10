@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:negocios_col_panel/widgets/grafico_sercular.dart';
+import 'package:negocios_col_panel/widgets/graficos_barras.dart';
 
 void main() => runApp(const MyApp());
 
@@ -15,10 +16,14 @@ class MyApp extends StatelessWidget {
           title: const Text('Material App Bar'),
         ),
         body: Center(
-          child: GraficoCircular(
+          child: GraficosBarras(
             data: [
-              ItemGraficoCircular(label: "Descargas", value: 25),
-              ItemGraficoCircular(label: "Negocios", value: 15),
+              ItemGraficosBarras(label: "L", value: 25, name: 'Lunes'),
+              ItemGraficosBarras(label: "M", value: 25, name: 'Lunes'),
+              ItemGraficosBarras(label: "M", value: 25, name: 'Lunes'),
+              ItemGraficosBarras(label: "J", value: 25, name: 'Lunes'),
+              ItemGraficosBarras(label: "V", value: 25, name: 'Lunes'),
+              
             ],
           ),
         ),
