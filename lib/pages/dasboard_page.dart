@@ -164,7 +164,8 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Future<void> getData() async {
     var request =
-        http.Request('GET', Uri.parse('http://localhost:8081/api/graficas'));
+        // http.Request('GET', Uri.parse('http://localhost:8081/api/graficas'));
+        http.Request('GET', Uri.parse('https://api-negosioscol-production.up.railway.app/api/graficas'));
 
     http.StreamedResponse response = await request.send();
 

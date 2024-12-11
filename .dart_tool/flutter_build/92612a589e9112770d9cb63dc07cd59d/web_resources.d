@@ -1,0 +1,1 @@
+:  /home/emilio/Developer/Escuela/negocios_col_panel/web/index.html
