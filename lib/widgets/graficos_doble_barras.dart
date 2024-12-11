@@ -39,10 +39,13 @@ class _GraficosDobleBarrasState extends State<GraficosDobleBarras> {
 
   @override
   Widget build(BuildContext context) {
-    return BarChart(
-      // isPlaying ? randomData() : mainBarData(),
-      mainBarData(),
-      duration: animDuration,
+    return AspectRatio(
+      aspectRatio: 1,
+      child: BarChart(
+        // isPlaying ? randomData() : mainBarData(),
+        mainBarData(),
+        duration: animDuration,
+      ),
     );
   }
 
