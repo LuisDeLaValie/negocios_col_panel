@@ -48,114 +48,116 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
         body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CardsData(totales: totalesDias),
-              const SizedBox(height: 50),
-              Wrap(
-                spacing: 25,
-                children: [
-                  Container(
-                    constraints: const BoxConstraints(
-                      maxWidth: 350,
-                      minWidth: 100,
-                      minHeight: 100,
-                      // maxHeight: 250,
-                    ),
-                    child: Card.filled(
-                      color: const Color.fromARGB(255, 56, 115, 125),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: GraficoCircular(data: [
-                          ItemGraficoCircular(
-                            label: "Descargas",
-                            value: (totales?.descargas ?? 1).toDouble(),
-                          ),
-                          ItemGraficoCircular(
-                            label: "Negocios",
-                            value: (totales?.negocios ?? 1).toDouble(),
-                          ),
-                          ItemGraficoCircular(
-                            label: "En Uso",
-                            value: (totales?.negociosPS ?? 1).toDouble(),
-                          ),
-                        ]),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CardsData(totales: totalesDias),
+                const SizedBox(height: 50),
+                Wrap(
+                  spacing: 25,
+                  children: [
+                    Container(
+                      constraints: const BoxConstraints(
+                        maxWidth: 350,
+                        minWidth: 100,
+                        minHeight: 100,
+                        // maxHeight: 250,
                       ),
-                    ),
-                  ),
-                  Container(
-                    constraints: const BoxConstraints(
-                      maxWidth: 350,
-                      minWidth: 100,
-                      minHeight: 100,
-                      // maxHeight: 250,
-                    ),
-                    child: Card.filled(
-                      color: const Color.fromARGB(255, 56, 115, 125),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: GraficosDobleBarras(
-                          data: estadisticas?.map((e) {
-                                late String label;
-
-                                switch (int.parse(e.mes)) {
-                                  case 1:
-                                    label = "Ene";
-                                    break;
-                                  case 2:
-                                    label = "Feb";
-                                    break;
-                                  case 3:
-                                    label = "Mar";
-                                    break;
-                                  case 4:
-                                    label = "Abr";
-                                    break;
-                                  case 5:
-                                    label = "May";
-                                    break;
-                                  case 6:
-                                    label = "Jun";
-                                    break;
-                                  case 7:
-                                    label = "Jul";
-                                    break;
-                                  case 8:
-                                    label = "Ago";
-                                    break;
-                                  case 9:
-                                    label = "Sep";
-                                    break;
-                                  case 10:
-                                    label = "Oct";
-                                    break;
-                                  case 11:
-                                    label = "Nov";
-                                    break;
-                                  case 12:
-                                    label = "Dic";
-                                    break;
-                                  default:
-                                    label = "";
-                                }
-
-                                return ItemGraficosDobleBarras(
-                                  name1: "Productos",
-                                  name2: "Servicios",
-                                  label: label,
-                                  value1: e.productos.toDouble(),
-                                  value2: e.servicios.toDouble(),
-                                );
-                              }).toList() ??
-                              [],
+                      child: Card.filled(
+                        color: const Color.fromARGB(255, 56, 115, 125),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: GraficoCircular(data: [
+                            ItemGraficoCircular(
+                              label: "Descargas",
+                              value: (totales?.descargas ?? 1).toDouble(),
+                            ),
+                            ItemGraficoCircular(
+                              label: "Negocios",
+                              value: (totales?.negocios ?? 1).toDouble(),
+                            ),
+                            ItemGraficoCircular(
+                              label: "En Uso",
+                              value: (totales?.negociosPS ?? 1).toDouble(),
+                            ),
+                          ]),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              )
-            ],
+                    Container(
+                      constraints: const BoxConstraints(
+                        maxWidth: 350,
+                        minWidth: 100,
+                        minHeight: 100,
+                        // maxHeight: 250,
+                      ),
+                      child: Card.filled(
+                        color: const Color.fromARGB(255, 56, 115, 125),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: GraficosDobleBarras(
+                            data: estadisticas?.map((e) {
+                                  late String label;
+            
+                                  switch (int.parse(e.mes)) {
+                                    case 1:
+                                      label = "Ene";
+                                      break;
+                                    case 2:
+                                      label = "Feb";
+                                      break;
+                                    case 3:
+                                      label = "Mar";
+                                      break;
+                                    case 4:
+                                      label = "Abr";
+                                      break;
+                                    case 5:
+                                      label = "May";
+                                      break;
+                                    case 6:
+                                      label = "Jun";
+                                      break;
+                                    case 7:
+                                      label = "Jul";
+                                      break;
+                                    case 8:
+                                      label = "Ago";
+                                      break;
+                                    case 9:
+                                      label = "Sep";
+                                      break;
+                                    case 10:
+                                      label = "Oct";
+                                      break;
+                                    case 11:
+                                      label = "Nov";
+                                      break;
+                                    case 12:
+                                      label = "Dic";
+                                      break;
+                                    default:
+                                      label = "";
+                                  }
+            
+                                  return ItemGraficosDobleBarras(
+                                    name1: "Productos",
+                                    name2: "Servicios",
+                                    label: label,
+                                    value1: e.productos.toDouble(),
+                                    value2: e.servicios.toDouble(),
+                                  );
+                                }).toList() ??
+                                [],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
