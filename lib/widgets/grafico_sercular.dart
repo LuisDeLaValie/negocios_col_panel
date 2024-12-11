@@ -38,31 +38,27 @@ class _GraficoCircularState extends State<GraficoCircular> {
             height: 18,
           ),
           Expanded(
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: PieChart(
-                PieChartData(
-                  pieTouchData: PieTouchData(
-                    touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                      setState(() {
-                        if (!event.isInterestedForInteractions ||
-                            pieTouchResponse == null ||
-                            pieTouchResponse.touchedSection == null) {
-                          touchedIndex = -1;
-                          return;
-                        }
-                        touchedIndex = pieTouchResponse
-                            .touchedSection!.touchedSectionIndex;
-                      });
-                    },
-                  ),
-                  borderData: FlBorderData(
-                    show: false,
-                  ),
-                  sectionsSpace: 0,
-                  centerSpaceRadius: 40,
-                  sections: showingSections(),
+            child: PieChart(
+              PieChartData(
+                pieTouchData: PieTouchData(
+                  touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                    setState(() {
+                      if (!event.isInterestedForInteractions ||
+                          pieTouchResponse == null ||
+                          pieTouchResponse.touchedSection == null) {
+                        touchedIndex = -1;
+                        return;
+                      }
+                      touchedIndex =
+                          pieTouchResponse.touchedSection!.touchedSectionIndex;
+                    });
+                  },
                 ),
+                borderData: FlBorderData(show: false),
+                sectionsSpace: 0,
+                centerSpaceRadius: 40,
+                startDegreeOffset: 15,
+                sections: showingSections(),
               ),
             ),
           ),
@@ -71,9 +67,6 @@ class _GraficoCircularState extends State<GraficoCircular> {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: showingLabels()),
-          const SizedBox(
-            width: 28,
-          ),
         ],
       ),
     );
@@ -100,7 +93,7 @@ class _GraficoCircularState extends State<GraficoCircular> {
       data.add(PieChartSectionData(
         color: colorsCharts[i],
         value: porsentaje,
-        title: '$porsentaje%',
+        title: '${porsentaje.toStringAsFixed(2)}%',
         radius: radius,
         titleStyle: TextStyle(
           fontSize: fontSize,
