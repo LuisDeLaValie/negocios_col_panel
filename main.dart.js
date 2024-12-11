@@ -54890,7 +54890,7 @@ return new A.uk(q,new A.tz(new A.pd(B.JO,B.is,!0,new A.HA(r,r,1/0,56),r),A.a5Q(A
 eN(){var s=0,r=A.S(t.H),q=this,p,o,n,m,l,k
 var $async$eN=A.T(function(a,b){if(a===1)return A.P(b,r)
 while(true)switch(s){case 0:s=2
-return A.W(A.al9("GET",A.i6("https://api-negosioscol-production.up.railway.app/api/graficas")).ns(),$async$eN)
+return A.W(A.al9("GET",A.i6("http://localhost:8081/api/graficas")).ns(),$async$eN)
 case 2:l=b
 s=l.b===200?3:5
 break
