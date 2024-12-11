@@ -125,12 +125,6 @@ class _GraficosBarrasState extends State<GraficosBarras> {
           sideTitles: SideTitles(
             showTitles: true,
             getTitlesWidget: (value, meta) {
-              const style = TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              );
-
               final text = widget.data[value.toInt()].label;
 
               return SideTitleWidget(
@@ -153,7 +147,8 @@ class _GraficosBarrasState extends State<GraficosBarras> {
       ),
       barGroups: {
         for (int i = 0; i < widget.data.length; i++)
-          i: makeGroupData(i, i, widget.data[i].value, isTouched: i == touchedIndex)
+          i: makeGroupData(i, i, widget.data[i].value,
+              isTouched: i == touchedIndex)
       }.values.toList(),
       gridData: const FlGridData(show: false),
     );

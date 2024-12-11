@@ -150,12 +150,6 @@ class _GraficosDobleBarrasState extends State<GraficosDobleBarras> {
           sideTitles: SideTitles(
             showTitles: true,
             getTitlesWidget: (value, meta) {
-              const style = TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              );
-
               final text = widget.data[value.toInt()].label;
 
               return SideTitleWidget(

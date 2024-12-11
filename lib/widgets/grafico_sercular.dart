@@ -79,7 +79,6 @@ class _GraficoCircularState extends State<GraficoCircular> {
     }
 
     List<PieChartSectionData> data = [];
-    int countColor = 0;
 
     for (var i = 0; i < widget.data.length; i++) {
       final item = widget.data[i];
@@ -108,7 +107,6 @@ class _GraficoCircularState extends State<GraficoCircular> {
 
   List<Widget> showingLabels() {
     List<Widget> data = [];
-    int countColor = 0;
 
     for (var i = 0; i < widget.data.length; i++) {
       final item = widget.data[i];
